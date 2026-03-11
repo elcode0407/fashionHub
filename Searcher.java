@@ -17,7 +17,7 @@ public class Searcher {
             int low = 0, high = vers.size() - 1;
             while (low <= high) {
                 int mid = low + (high - low) / 2;
-                LocalDateTime midDate = LocalDateTime.parse(vers.get(mid).lastChanged, formatter);
+                LocalDateTime midDate = VersionManager.getDate(vers.get(mid));
                 if (midDate.isEqual(formatedDate))
                     return vers.get(mid);
                 if (midDate.compareTo(formatedDate)<0)

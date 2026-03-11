@@ -36,7 +36,7 @@ public class VersionManager {
             return LocalDateTime.parse(ver.lastChanged, formatter);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid date format: " + ver.lastChanged);
-            return null;
+            return LocalDateTime.parse("0000-00-00: 00:00", formatter);
         }
     }
 }

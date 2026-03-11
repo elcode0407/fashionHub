@@ -26,7 +26,7 @@ public class CSVHandler {
                 int id = Integer.parseInt(data_temp[0]);
                 String createdAt = data_temp[1];
                 String lastChanged = data_temp[2];
-                String author= data_temp[4];
+                String author= data_temp[3];
                 List<String> tags = Arrays.asList(data_temp[4].split("\\|"));
                 String notes = data_temp[5];
                 List<String> filepaths = Arrays.asList(data_temp[6].split("\\|"));
