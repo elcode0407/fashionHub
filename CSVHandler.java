@@ -12,9 +12,9 @@ import java.util.List;
 public class CSVHandler {
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
-    private static final String FILE_HEADER = "id,createdAt,author,tags,notes,filepaths";
-    public static ArrayList<Vesion> read(String filepath){
-        ArrayList<Vesion> data = new ArrayList<>();
+    private static final String FILE_HEADER = "id,createdAt,lastChanged,author,tags,notes,filepaths";
+    public static ArrayList<Version> read(String filepath){ 
+        ArrayList<Version> data = new ArrayList<>();
         String cvsSplitBy = ",";
         data.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -24,27 +24,30 @@ public class CSVHandler {
                 // Use comma as separator of rows
                 String[] data_temp = line.split(cvsSplitBy);
                 int id = Integer.parseInt(data_temp[0]);
-                long createdAt = Long.parseLong(data_temp[1]);
-                String author= data_temp[2];
-                List<String> tags = Arrays.asList(data_temp[3].split("\\|"));
-                String notes = data_temp[4];
-                List<String> filepaths = Arrays.asList(data_temp[5].split("\\|"));
+                String createdAt = data_temp[1];
+                String lastChanged = data_temp[2];
+                String author= data_temp[4];
+                List<String> tags = Arrays.asList(data_temp[4].split("\\|"));
+                String notes = data_temp[5];
+                List<String> filepaths = Arrays.asList(data_temp[6].split("\\|"));
 
-                data.add(new Vesion(id, author, createdAt, tags, notes, filepaths));
+                data.add(new Version(id, author, createdAt,lastChanged, tags, notes, filepaths));
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Missing Data");
         }
         return data;
     }
-    public static void write(String filepath, List<Vesion> versions){
+    public static void write(String filepath, List<Version> versions){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
             // Adds header to start with
             writer.append(FILE_HEADER);
             writer.append(NEW_LINE_SEPARATOR);
 
             // Goes through record rows to add
-            for (Vesion version : versions) {
+            for (Version version : versions) {
                 String[] row = version.toCSVRow();
                 // Loop to go through row's data
                 for (int i = 0; i < row.length; i++) {
