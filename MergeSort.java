@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class MergeSort {
+    //Merge sort implmeneted from our lectures, that was altred for date input(LocalDateTime).
     public static void merge(List<Version> vers, int l, int m, int r){
         int n1 = m - l + 1;
         int n2 = r - m;

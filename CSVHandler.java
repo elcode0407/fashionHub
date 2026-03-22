@@ -10,10 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CSVHandler {
-    private static final String COMMA_DELIMITER = ",";
-    private static final String NEW_LINE_SEPARATOR = "\n";
-    private static final String FILE_HEADER = "id,createdAt,lastChanged,author,tags,notes,filepaths";
-    public static ArrayList<Version> read(String filepath){ 
+
+    private final String COMMA_DELIMITER = ",";
+    private final String NEW_LINE_SEPARATOR = "\n";
+    private final String FILE_HEADER = "id,createdAt,lastChanged,author,tags,notes,filepaths, commited";
+    
+    // Read and write methods implemented from our class and optimized using GenAI
+    public ArrayList<Version> read(String filepath){ 
         ArrayList<Version> data = new ArrayList<>();
         String cvsSplitBy = ",";
         data.clear();
@@ -27,11 +30,12 @@ public class CSVHandler {
                 String createdAt = data_temp[1];
                 String lastChanged = data_temp[2];
                 String author= data_temp[3];
-                List<String> tags = Arrays.asList(data_temp[4].split("\\|"));
+                ArrayList<String> tags = new ArrayList<>(Arrays.asList(data_temp[4].split("\\|")));
                 String notes = data_temp[5];
                 List<String> filepaths = Arrays.asList(data_temp[6].split("\\|"));
+                boolean commited = data_temp[7].equals("yes") ? true : false;
 
-                data.add(new Version(id, author, createdAt,lastChanged, tags, notes, filepaths));
+                data.add(new Version(id, author, createdAt,lastChanged, tags, notes, filepaths,commited));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,7 +44,8 @@ public class CSVHandler {
         }
         return data;
     }
-    public static void write(String filepath, List<Version> versions){
+   
+    public void write(String filepath, List<Version> versions){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
             // Adds header to start with
             writer.append(FILE_HEADER);

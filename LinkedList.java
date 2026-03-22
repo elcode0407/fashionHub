@@ -2,6 +2,7 @@ package fashiony;
 
 import java.util.Iterator;
 
+//LinkedList implemented from our class lectures, implements Iterable to be able to iterate thorugh data easily.
 public class LinkedList<T>  implements Iterable<T>{
     Node<T> head;
     
