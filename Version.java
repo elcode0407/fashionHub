@@ -5,8 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 // Class Version is used to store data of versions
-public class Version {
-    int id;
+public class Version extends BaseEntity{
     String createdAt;
     String lastChanged;
     String author;

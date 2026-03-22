@@ -13,7 +13,7 @@ public class CSVHandler {
 
     private final String COMMA_DELIMITER = ",";
     private final String NEW_LINE_SEPARATOR = "\n";
-    private final String FILE_HEADER = "id,createdAt,lastChanged,author,tags,notes,filepaths, commited";
+    private final String FILE_HEADER = "id,createdAt,lastChanged,author,tags,notes,filepaths,commited";
     
     // Read and write methods implemented from our class and optimized using GenAI
     public ArrayList<Version> read(String filepath){ 
