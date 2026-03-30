@@ -50,6 +50,7 @@ public class VersionManager {
                 undoStack.push(new Operation(OpType.ADD_TAG,history.get(i), tag));
                 history.get(i).addTag(tag);
                 history.get(i).commited = false;
+                tagIndex.build(history);
                 return true;
             }
         }

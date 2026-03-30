@@ -13,12 +13,13 @@ public class Main {
 
         //Welcome message
         Scanner sc = new Scanner(System.in);
-        System.out.println("███████╗ █████╗ ███████╗██╗  ██╗██╗ ██████╗ ███╗   ██╗");
-        System.out.println("██╔════╝██╔══██╗██╔════╝██║  ██║██║██╔═══██╗████╗  ██║");
-        System.out.println("█████╗  ███████║███████╗███████║██║██║   ██║██╔██╗ ██║");
-        System.out.println("██╔══╝  ██╔══██║╚════██║██╔══██║██║██║   ██║██║╚██╗██║");
-        System.out.println("██║     ██║  ██║███████║██║  ██║██║╚██████╔╝██║ ╚████║");
-        System.out.println("╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝");
+        //Logo Output with help of ChatGPT (*O*)
+        System.out.println("███████╗ █████╗ ███████╗██╗  ██╗██╗ ██████╗ ███╗   ██╗██╗   ██╗");
+        System.out.println("██╔════╝██╔══██╗██╔════╝██║  ██║██║██╔═══██╗████╗  ██║╚██╗ ██╔╝");
+        System.out.println("█████╗  ███████║███████╗███████║██║██║   ██║██╔██╗ ██║ ╚████╔╝ ");
+        System.out.println("██╔══╝  ██╔══██║╚════██║██╔══██║██║██║   ██║██║╚██╗██║  ╚██╔╝  ");
+        System.out.println("██║     ██║  ██║███████║██║  ██║██║╚██████╔╝██║ ╚████║   ██║   ");
+        System.out.println("╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ");
         System.out.println("========================================");
         System.out.println("        FASHION VERSION MANAGER SYSTEM");
         System.out.println("========================================");
