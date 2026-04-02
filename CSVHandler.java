@@ -2,6 +2,7 @@ package fashiony;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,33 +18,40 @@ public class CSVHandler {
     
     // Read and write methods implemented from our class and optimized using GenAI
     public ArrayList<Version> read(String filepath){ 
-        ArrayList<Version> data = new ArrayList<>();
-        String cvsSplitBy = ",";
-        data.clear();
-        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
-            // Skip header
-            String line = br.readLine();
-            while ((line = br.readLine()) != null) {
-                // Use comma as separator of rows
-                String[] data_temp = line.split(cvsSplitBy);
-                int id = Integer.parseInt(data_temp[0]);
-                String createdAt = data_temp[1];
-                String lastChanged = data_temp[2];
-                String author= data_temp[3];
-                ArrayList<String> tags = new ArrayList<>(Arrays.asList(data_temp[4].split("\\|")));
-                String notes = data_temp[5];
-                List<String> filepaths = Arrays.asList(data_temp[6].split("\\|"));
-                boolean commited = data_temp[7].equals("yes") ? true : false;
+    ArrayList<Version> data = new ArrayList<>();
+    String cvsSplitBy = ",";
+    data.clear();
 
-                data.add(new Version(id, author, createdAt,lastChanged, tags, notes, filepaths,commited));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("Missing Data");
-        }
+    File file = new File(filepath);
+
+    if (!file.exists()) {
         return data;
     }
+
+    try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+        String line = br.readLine(); // skip header
+
+        while ((line = br.readLine()) != null) {
+            String[] data_temp = line.split(cvsSplitBy);
+            int id = Integer.parseInt(data_temp[0]);
+            String createdAt = data_temp[1];
+            String lastChanged = data_temp[2];
+            String author = data_temp[3];
+            ArrayList<String> tags = new ArrayList<>(Arrays.asList(data_temp[4].split("\\|")));
+            String notes = data_temp[5];
+            List<String> filepaths = Arrays.asList(data_temp[6].split("\\|"));
+            boolean commited = data_temp[7].equals("yes");
+
+            data.add(new Version(id, author, createdAt, lastChanged, tags, notes, filepaths, commited));
+        }
+    } catch (IOException e) {
+        System.err.println("Error reading CSV file: " + e.getMessage());
+    } catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println("Missing Data");
+    }
+
+    return data;
+}
    
     public void write(String filepath, List<Version> versions){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Creating instance of VersionManager and passing desired path.
-        VersionManager vm = new VersionManager("fashiony/ver2.csv");
+        VersionManager vm = new VersionManager("fashiony/test_versions_10k.csv");
 
         //Welcome message
         Scanner sc = new Scanner(System.in);
